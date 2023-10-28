@@ -17,8 +17,30 @@ const onChange = e => {
     setInputs(prevInputs => ({ ...prevInputs, [name]: value }));
 };
 
-const onSubmitForm = e =>{
+const onSubmitForm = async e => {
+    e.preventDefault();
     
+    try {
+        const body = { email, password};
+        const response = await fetch(
+            "http://localhost:5000/auth/login",
+            {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(body)
+            }
+        );
+  const parseRes = await response.json();
+
+  localStorage.setItem("token" , parseRes.token);
+
+  setAuth(true);
+
+    } catch (err) {
+        console.error(err.message);
+    }
 }
 
   return (
