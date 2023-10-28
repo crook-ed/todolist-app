@@ -26,7 +26,7 @@ const Dashboard = ({setAuth}) => {
 
       useEffect(() => {
         getProfile();
-      });
+      }, []);
 
     return (
         <>
